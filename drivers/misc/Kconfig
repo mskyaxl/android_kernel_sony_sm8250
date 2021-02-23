@@ -605,7 +605,6 @@ config WIGIG_SENSING_SPI
 	  The output of the driver is CIRs (Channel Impulse Response) which
 	  must be processed in user space in order to get meaningful results.
 
-<<<<<<< HEAD
 config QTI_XR_SMRTVWR_MISC
 	tristate "QTI XR Reference device Misc driver support"
 	help
@@ -622,7 +621,6 @@ config QTI_MAXIM_FAN_CONTROLLER
 	  setting different PWM, different temperature settings etc.
 	  Also, this driver initializes the power for the fan controller
 	  and exposes sysfs node to control different speeds of fan.
-=======
 config SENSORS_TCS3490
         tristate "AMS TCS3490 Sensor Driver"
         depends on I2C
@@ -631,7 +629,6 @@ config SENSORS_TCS3490
           If you say yes here you get support for the AMS tcs3490,
           ALS and color light sensors.
           This driver can also be build as module.
->>>>>>> 949adff7669b (drivers: misc: Add TCS3490 Sensor driver)
 
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
