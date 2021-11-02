@@ -1,0 +1,16 @@
+# Linux kernel for Xperia 1 II
+
+This kernel source is taken from Sony Open Source Archive version 58.1.A.178
+with few changes included, as shown below:
+
+- Driver modules are from the `vendor` directory of the archive
+- Sony specific driver modules from SOMC are put in `drivers/somc` directory
+- Qcom audio drivers resides in `techpak` directory
+- Defconfig is `pdx203-bbn_defconfig`
+
+And the issues are:
+
+- The DTB files are in-complete as published by sony and need further changes
+  or the device will not boot
+- The modules are not tested
+
