@@ -140,20 +140,20 @@ KBUILD_EXTRA_SYMBOLS +=$(OUT)/obj/vendor/qcom/opensource/audio-kernel/soc/Module
 endif
 
 # Module information used by KBuild framework
-obj-$(CONFIG_SND_SOC_BOLERO) += bolero_cdc_dlkm.o
-bolero_cdc_dlkm-y := $(BOLERO_OBJS)
+obj-$(CONFIG_SND_SOC_BOLERO) += audio_bolero_cdc.o
+audio_bolero_cdc-y := $(BOLERO_OBJS)
 
-obj-$(CONFIG_WSA_MACRO) += wsa_macro_dlkm.o
-wsa_macro_dlkm-y := $(WSA_OBJS)
+obj-$(CONFIG_WSA_MACRO) += audio_wsa_macro.o
+audio_wsa_macro-y := $(WSA_OBJS)
 
-obj-$(CONFIG_VA_MACRO) += va_macro_dlkm.o
-va_macro_dlkm-y := $(VA_OBJS)
+obj-$(CONFIG_VA_MACRO) += audio_va_macro.o
+audio_va_macro-y := $(VA_OBJS)
 
-obj-$(CONFIG_TX_MACRO) += tx_macro_dlkm.o
-tx_macro_dlkm-y := $(TX_OBJS)
+obj-$(CONFIG_TX_MACRO) += audio_tx_macro.o
+audio_tx_macro-y := $(TX_OBJS)
 
-obj-$(CONFIG_RX_MACRO) += rx_macro_dlkm.o
-rx_macro_dlkm-y := $(RX_OBJS)
+obj-$(CONFIG_RX_MACRO) += audio_rx_macro.o
+audio_rx_macro-y := $(RX_OBJS)
 
 # inject some build related information
 DEFINES += -DBUILD_TIMESTAMP=\"$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')\"

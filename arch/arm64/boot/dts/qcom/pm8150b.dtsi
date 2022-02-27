@@ -542,6 +542,7 @@
 				qcom,wf-repeat-count = <2>;
 				qcom,wf-s-repeat-count = <1>;
 			};
+
 		};
 	};
 };

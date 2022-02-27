@@ -80,7 +80,7 @@ ifeq ($(call is-board-platform-in-list,$(MSMSTEPPE) $(TRINKET) kona sdm660), tru
 ifneq ($(TARGET_BOARD_AUTO),true)
 include $(CLEAR_VARS)
 LOCAL_MODULE              := $(AUDIO_CHIPSET)_pinctrl_wcd.ko
-LOCAL_MODULE_KBUILD_NAME  := pinctrl_wcd_dlkm.ko
+LOCAL_MODULE_KBUILD_NAME  := audio_pinctrl_wcd.ko
 LOCAL_MODULE_TAGS         := optional
 LOCAL_MODULE_DEBUG_ENABLE := true
 LOCAL_MODULE_PATH         := $(KERNEL_MODULES_OUT)
