@@ -632,7 +632,7 @@
 			console-size = <0x40000>;
 			ftrace-size = <0x0>;
 			msg-size = <0x20000 0x20000>;
-			cc-size = <0x0>;
+			ecc-size = <16>;
 		};
 
 		cmdline_region: cmdline_region@ffd00000 {
@@ -3097,6 +3097,7 @@
 		clock-names =
 			"core_clk",
 			"bus_aggr_clk",
+			"1x_clkref",
 			"iface_clk",
 			"core_clk_unipro",
 			"core_clk_ice",
@@ -3107,6 +3108,7 @@
 		clocks =
 			<&clock_gcc GCC_UFS_PHY_AXI_CLK>,
 			<&clock_gcc GCC_AGGRE_UFS_PHY_AXI_CLK>,
+			<&clock_gcc GCC_UFS_1X_CLKREF_EN>,
 			<&clock_gcc GCC_UFS_PHY_AHB_CLK>,
 			<&clock_gcc GCC_UFS_PHY_UNIPRO_CORE_CLK>,
 			<&clock_gcc GCC_UFS_PHY_ICE_CORE_CLK>,
@@ -3116,6 +3118,7 @@
 			<&clock_gcc GCC_UFS_PHY_RX_SYMBOL_1_CLK>;
 		freq-table-hz =
 			<37500000 300000000>,
+			<0 0>,
 			<0 0>,
 			<0 0>,
 			<37500000 300000000>,
