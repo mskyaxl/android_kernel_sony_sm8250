@@ -11,6 +11,7 @@
 #include "dsi-panel-nt35695b-truly-fhd-cmd.dtsi"
 #include "dsi-panel-nt35695b-truly-fhd-video.dtsi"
 #include "dsi-panel-ext-bridge-1080p.dtsi"
+#include "dsi-panel-ext-bridge-4k-video.dtsi"
 #include "dsi-panel-sim-cmd.dtsi"
 #include "dsi-panel-sim-video.dtsi"
 #include "dsi-panel-sim-dsc375-cmd.dtsi"

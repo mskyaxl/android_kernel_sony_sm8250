@@ -288,7 +288,6 @@
 			#size-cells = <1>;
 			qcom,pmic-revid = <&pm8150b_revid>;
 			qcom,pmic-pbs = <&pm8150b_pbs1>;
-			status = "disabled";
 
 			qcom,fg-batt-soc@4000 {
 				status = "okay";

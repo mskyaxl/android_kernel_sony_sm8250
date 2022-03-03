@@ -978,10 +978,6 @@
 	};
 };
 
-&cdc_dmic45_gpios {
-	status = "disabled";
-};
-
 &lpi_tlmm {
 	somc_cdc_dmic01_clk_active: somc_dmic01_clk_active {
 		mux {
@@ -1353,12 +1349,6 @@
 };
 
 &pm8150a_bob {
-	regulator-min-microvolt = <3350000>;
-	qcom,init-voltage = <3350000>;
-	status = "okay";
-};
-
-&pm8150a_bob_ao {
 	regulator-min-microvolt = <3350000>;
 	regulator-max-microvolt = <3960000>;
 	qcom,init-voltage = <3350000>;
@@ -2098,7 +2088,21 @@
 		config {
 			pins = "gpio23";
 			drive-strength = <2>;
-			bias-pull-up;
+			bias-disable;
+			output-low;
+		};
+	};
+
+	sm_gpio_23_input_no_pull {
+		mux {
+			pins = "gpio23";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio23";
+			drive-strength = <0x02>;
+			bias-disable;
 			input-enable;
 		};
 	};
