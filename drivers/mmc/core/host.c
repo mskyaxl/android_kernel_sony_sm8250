@@ -33,7 +33,6 @@
 #include "pwrseq.h"
 #include "sdio_ops.h"
 
-#define cls_dev_to_mmc_host(d)	container_of(d, struct mmc_host, class_dev)
 
 #define MMC_DEVFRQ_DEFAULT_UP_THRESHOLD 35
 #define MMC_DEVFRQ_DEFAULT_DOWN_THRESHOLD 5
@@ -476,6 +475,57 @@ struct mmc_host *mmc_alloc_host(int extra, struct device *dev)
 	return host;
 }
 EXPORT_SYMBOL(mmc_alloc_host);
+#ifdef CONFIG_MMC_PERF_PROFILING
+static ssize_t
+show_perf(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	struct mmc_host *host = cls_dev_to_mmc_host(dev);
+	int64_t rtime_drv, wtime_drv;
+	unsigned long rbytes_drv, wbytes_drv, flags;
+
+	spin_lock_irqsave(&host->lock, flags);
+
+	rbytes_drv = host->perf.rbytes_drv;
+	wbytes_drv = host->perf.wbytes_drv;
+
+	rtime_drv = ktime_to_us(host->perf.rtime_drv);
+	wtime_drv = ktime_to_us(host->perf.wtime_drv);
+
+	spin_unlock_irqrestore(&host->lock, flags);
+
+	return snprintf(buf, PAGE_SIZE, "Write performance at driver Level:"
+					"%lu bytes in %lld microseconds\n"
+					"Read performance at driver Level:"
+					"%lu bytes in %lld microseconds\n",
+					wbytes_drv, wtime_drv,
+					rbytes_drv, rtime_drv);
+}
+
+static ssize_t
+set_perf(struct device *dev, struct device_attribute *attr,
+		const char *buf, size_t count)
+{
+	int64_t value;
+	struct mmc_host *host = cls_dev_to_mmc_host(dev);
+	unsigned long flags;
+
+	sscanf(buf, "%lld", &value);
+	spin_lock_irqsave(&host->lock, flags);
+	if (!value) {
+		memset(&host->perf, 0, sizeof(host->perf));
+		host->perf_enable = false;
+	} else {
+		host->perf_enable = true;
+	}
+	spin_unlock_irqrestore(&host->lock, flags);
+
+	return count;
+}
+
+static DEVICE_ATTR(perf, S_IRUGO | S_IWUSR,
+		show_perf, set_perf);
+
+#endif
 
 static ssize_t enable_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -667,6 +717,10 @@ int mmc_add_host(struct mmc_host *host)
 		pr_err("%s: failed to create clk scale sysfs group with err %d\n",
 				__func__, err);
 
+	if (err)
+		pr_err("%s: failed to create sysfs group with err %d\n",
+							 __func__, err);
+
 	mmc_start_host(host);
 	if (!(host->pm_flags & MMC_PM_IGNORE_PM_NOTIFY))
 		mmc_register_pm_notifier(host);
@@ -692,6 +746,10 @@ void mmc_remove_host(struct mmc_host *host)
 
 #ifdef CONFIG_DEBUG_FS
 	mmc_remove_host_debugfs(host);
+#endif
+
+#ifdef CONFIG_BLOCK
+	mmc_latency_hist_sysfs_exit(host);
 #endif
 
 #ifdef CONFIG_MMC_IPC_LOGGING
