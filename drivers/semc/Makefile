@@ -10,4 +10,3 @@ obj-y				+= slg51000_regulator/
 obj-y				+= powerkey_forcecrash/
 obj-y				+= rmnet/
 obj-y				+= pn553/
-header-y				+= include/sony_camera.h
