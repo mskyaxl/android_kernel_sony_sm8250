@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- * Copyright (c) 2016-2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2016-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 #include <linux/debugfs.h>
 #include <linux/errno.h>
@@ -873,6 +874,7 @@ static ssize_t tzdbgfs_read(struct file *file, char __user *buf,
 	return simple_read_from_buffer(buf, len, offp,
 				tzdbg.stat[(*tz_id)].data, len);
 }
+
 
 static const struct file_operations tzdbg_fops = {
 	.owner   = THIS_MODULE,
