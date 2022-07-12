@@ -2,8 +2,8 @@
 
 mkdir out
 
-GCC_PATH=/home/bbn/LineageOS/LineageOS_New/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
-CLANG_PATH=/home/bbn/LineageOS/LineageOS_New/prebuilts/clang/host/linux-x86/clang-r383902/bin
+GCC_PATH=/home/bbn/LineageOS/LineageOS/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+CLANG_PATH=/home/bbn/LineageOS/LineageOS/prebuilts/clang/host/linux-x86/clang-r383902/bin
 
 BUILD_CROSS_COMPILE=${GCC_PATH}/aarch64-linux-android-
 CLANG_TRIPLE=aarch64-linux-android-
